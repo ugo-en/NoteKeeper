@@ -12,4 +12,37 @@
     <string name="title">Title</string>
     <string name="write_your_content_here">Write your content here</string>
     <string name="title_activity_note_list">NoteListActivity</string>
+    <string name="title_activity_note_list2">NoteListActivity2</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="notes">Notes</string>
+    <string name="home">Home</string>
+    <string name="settings">Settings</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Notebooks">"Notebooks "</string>
+    <string name="note_keeper">Note Keeper</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="tags">Tags</string>
+    <string name="add_new_notebook">Add new notebook</string>
+    <string name="save">Save</string>
+    <string name="cancel_editing">Cancel Editing</string>
+    <string name="delete">Delete</string>
+    <string name="send_as_email">Send as email</string>
+    <string name="save_this_note">Save this note</string>
+    <string name="plus">+</string>
+    <string name="select_notebook_for_note">Select a notebook for this note</string>
+    <string name="create_new_note">Create new note</string>
 </resources>

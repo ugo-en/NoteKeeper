@@ -18,7 +18,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/note_list_item_notebook_title"
+                android:id="@+id/note_list_item_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="TextView"
@@ -31,7 +31,7 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/note_list_item_note_title"
+                android:id="@+id/note_list_item_notebook_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
@@ -40,7 +40,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/note_list_item_notebook_title" />
+                app:layout_constraintTop_toBottomOf="@id/note_list_item_name" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

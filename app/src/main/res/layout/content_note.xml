@@ -6,42 +6,84 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <Spinner
-        android:id="@+id/spinner_notebooks"
-        android:layout_width="0dp"
+    <Button
+        android:id="@+id/new_notebook_btn"
+        android:layout_width="20dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="0dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+        android:padding="7dp"
+        android:text="@string/plus"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/spinner_notebooks"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/text_note_title"
+        android:id="@+id/note_tags"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:ems="10"
         android:gravity="start|top"
-        android:hint="@string/title"
-        android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="@+id/spinner_notebooks"
-        app:layout_constraintStart_toStartOf="@+id/spinner_notebooks"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_notebooks"
-        android:importantForAutofill="no" />
+        android:hint="@string/tags"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/note_name" />
 
     <EditText
-        android:id="@+id/text_note_content"
+        android:id="@+id/note_content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="3dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="@string/write_your_content_here"
+        android:importantForAutofill="no"
         android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="@+id/text_note_title"
-        app:layout_constraintStart_toStartOf="@+id/text_note_title"
-        app:layout_constraintTop_toBottomOf="@+id/text_note_title"
-        android:importantForAutofill="no" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/note_tags" />
+
+    <EditText
+        android:id="@+id/note_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/title"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinner_notebooks" />
+
+    <Spinner
+        android:id="@+id/spinner_notebooks"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:tooltipText="@string/select_notebook_for_note"
+        app:layout_constraintBottom_toTopOf="@+id/note_name"
+        app:layout_constraintEnd_toStartOf="@id/new_notebook_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/new_notebook_save_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/colorAccent"
+        android:clickable="true"
+        android:contentDescription="@string/save_this_note"
+        android:src="@drawable/ic_baseline_check_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
