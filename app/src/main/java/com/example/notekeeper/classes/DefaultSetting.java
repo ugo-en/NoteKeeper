@@ -1,14 +1,23 @@
 package com.example.notekeeper.classes;
 
-import android.os.Handler;
 
-public class Setting {
+public abstract class DefaultSetting {
+    public static final int DEFAULT = 0;
+    public static final int TOGGLE = 1;
+
     private String mainText, subText;
+    private int settingType = DEFAULT;
 
-    public Setting(String mainText, String subText) {
+    public DefaultSetting(String mainText, String subText, int settingType) {
         this.mainText = mainText;
         this.subText = subText;
+        this.settingType = settingType;
     }
+
+    public int getSettingType() {
+        return settingType;
+    }
+
 
     public String getMainText() {
         return mainText;
@@ -25,4 +34,8 @@ public class Setting {
     public void setSubText(String subText) {
         this.subText = subText;
     }
+
+    abstract public void clickFunction();
 }
+
+

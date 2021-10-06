@@ -45,4 +45,6 @@
     <string name="plus">+</string>
     <string name="select_notebook_for_note">Select a notebook for this note</string>
     <string name="create_new_note">Create new note</string>
+    <string name="sub_text">Sub Text</string>
+    <string name="main_text">Main Text</string>
 </resources>
