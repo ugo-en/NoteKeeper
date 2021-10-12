@@ -5,12 +5,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/bgColor"
+    android:textColor="?attr/textColor"
     tools:context=".screens.MainActivity">
 
     <FrameLayout
         android:id="@+id/flFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="?attr/bgColor"
+        android:textColor="?attr/textColor"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -21,6 +25,16 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="75dp"
+
+        android:background="@drawable/bottom_navigation_bg"
+        app:itemBackground="@drawable/bottom_navigation_bg"
+
+        android:textColor="@drawable/bottom_navigation_tab_color"
+        app:itemIconTint="@drawable/bottom_navigation_tab_color"
+        app:itemTextColor="@drawable/bottom_navigation_tab_color"
+
+        android:fitsSystemWindows="true"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

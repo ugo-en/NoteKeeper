@@ -7,19 +7,24 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Note {
-    private int id, noteBookId;
+    public static int ONLINE_ID_NOT_AVAILABLE = -1;
+
+    private int id, noteBookId, onlineId;
     private String name, tags, content;
     private Date dateCreated, dateLastEdited;
 
-    protected Note(int id, int noteBookId, String name, String tags, String content, Date dateCreated, Date dateLastEdited) {
+    protected Note(int id, int noteBookId, int onlineId, String name, String tags, String content, Date dateCreated, Date dateLastEdited) {
         this.id = id;
         this.noteBookId = noteBookId;
+        this.onlineId = onlineId;
         this.name = name;
         this.tags = tags;
         this.content = content;
         this.dateCreated = dateCreated;
         this.dateLastEdited = dateLastEdited;
     }
+
+    public int getOnlineId() { return onlineId; }
 
     public int getId() { return id; }
 
@@ -30,11 +35,11 @@ public class Note {
         return dbGuy.getNotebook(this.noteBookId);
     }
 
-    public String getName() { return name; }
+    public String getName() { return name==null?"":name; }
 
-    public String getTags() { return tags; }
+    public String getTags() { return tags==null?"":tags; }
 
-    public String getContent() { return content; }
+    public String getContent() { return content==null?"":content; }
 
     public Date getDateCreated() { return dateCreated; }
 
@@ -66,7 +71,7 @@ public class Note {
 
     public static Note createNote(Context context, String name, String tags, String content, int noteBookId){
         DBGuy dbGuy = new DBGuy(context);
-        return dbGuy.createNote(noteBookId, name,tags,content);
+        return dbGuy.createNote(noteBookId, name,tags,content, -1);
     }
 
     public static Note getNoteById(Context context, int id){

@@ -11,6 +11,7 @@ import android.widget.EditText;
 import com.example.notekeeper.R;
 import com.example.notekeeper.data.Notebook;
 import com.example.notekeeper.classes.Extras;
+import com.example.notekeeper.data.Setting;
 
 public class NotebookActivity extends AppCompatActivity {
 
@@ -27,6 +28,7 @@ public class NotebookActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        showTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.notebook_activity);
 
@@ -62,6 +64,11 @@ public class NotebookActivity extends AppCompatActivity {
         }
     }
 
+    private void showTheme(){
+        Setting theme = Extras.getTheme(getBaseContext());
+        setTheme(theme.getValue().equals(Setting.THEME_LIGHT)?R.style.AppTheme:R.style.DarkTheme);
+    }
+
 
     private void btnFunction(){
         String name = nameView.getText().toString().trim();
@@ -81,6 +88,7 @@ public class NotebookActivity extends AppCompatActivity {
                 }
                 else{
                     Extras.showToast(getBaseContext(),"Successfully created this notebook!");
+                    moveBackToNoteActivity(isCreating, notebookId);
                 }
             }
             else{
@@ -89,13 +97,7 @@ public class NotebookActivity extends AppCompatActivity {
                 notebook.setDescription(description);
                 notebook.save(getBaseContext());
                 Extras.showToast(getBaseContext(),"This notebook has been saved!");
-            }
-
-            if (currentNoteInEdit == NULL_NOTEBOOK_ID){
                 moveToMainActivity(isCreating, notebookId);
-            }
-            else{
-                moveBackToNoteActivity(isCreating, notebookId);
             }
         }
     }

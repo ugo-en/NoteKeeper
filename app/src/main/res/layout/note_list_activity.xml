@@ -5,6 +5,8 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/bgColor"
+    android:textColor="?attr/textColor"
     tools:context=".practice.NoteListActivity">
 
 
@@ -13,6 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:spanCount="5"
+        android:background="?attr/bgColor"
+        android:textColor="?attr/textColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +32,7 @@
         android:background="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add"
+        app:srcCompat="@drawable/ic_add_vector"
         android:contentDescription="@string/create_new_note" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

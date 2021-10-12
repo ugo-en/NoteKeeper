@@ -47,4 +47,13 @@
     <string name="create_new_note">Create new note</string>
     <string name="sub_text">Sub Text</string>
     <string name="main_text">Main Text</string>
+    <string name="notebook_description">Notebook description</string>
+    <string name="create_a_new_notebook">Create a new notebook</string>
+    <string name="create">Create</string>
+    <string name="textview">TextView</string>
+    <string name="new_note">New Note</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="privacy_statement">- This app does not collect or store any personal data.\n\n- This app does not collect or store your notes or notebooks on any external server.\n\n- This app does not send your notes, notebooks or any personal data to any third party entities.\n\n- All your notes and notebooks are stored on this device only.</string>
+    <string name="developer_contact">Developer Contact</string>
+    <string name="options">Options</string>
 </resources>

@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screens.SplashActivity">
+    tools:context=".screens.SplashActivity"
+    android:background="?attr/bgColor"
+    android:textColor="?attr/textColor">
 
     <TextView
         android:id="@+id/splash_hdr"

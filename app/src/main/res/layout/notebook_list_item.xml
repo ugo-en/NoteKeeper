@@ -2,7 +2,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="?attr/bgColor"
+    android:textColor="?attr/textColor">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/note_list_item_card_view"
@@ -11,11 +13,16 @@
         app:cardCornerRadius="4dp"
         app:cardElevation="4dp"
         app:cardUseCompatPadding="true"
-        app:contentPadding="16dp" >
+        app:contentPadding="16dp"
+        android:background="?attr/bgColor"
+       app:cardBackgroundColor="?attr/bgColor"
+        android:textColor="?attr/textColor">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="?attr/bgColor"
+            android:textColor="?attr/textColor">
 
             <TextView
                 android:id="@+id/notebook_list_item_name"
@@ -23,6 +30,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/name"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:background="?attr/bgColor"
+                android:textSize="18sp"
+                android:textColor="?attr/textColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -37,6 +47,9 @@
                 android:layout_marginTop="2dp"
                 android:text="@string/description"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:background="?attr/bgColor"
+                android:textSize="15sp"
+                android:textColor="?attr/textColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

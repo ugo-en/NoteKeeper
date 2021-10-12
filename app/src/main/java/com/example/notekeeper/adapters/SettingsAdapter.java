@@ -24,7 +24,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
     public SettingsAdapter(Context context, List<DefaultSetting> notes) {
         this.mContext = context;
         this.mSettings = notes;
-        mLayoutInflater = LayoutInflater.from(mContext);
+        this.mLayoutInflater = LayoutInflater.from(mContext);
     }
 
     @Override
@@ -85,10 +85,16 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
             return this.mToggleSwitch;
         }
 
-        public void setToggleSwitch(ToggleSetting setting) {
-            mToggleSwitch = (Switch) mItemView.findViewById(R.id.settings_list_item_toggle);
+        public void setToggleSwitch(final ToggleSetting setting) {
+            mToggleSwitch = mItemView.findViewById(R.id.settings_list_item_toggle);
             if (mToggleSwitch != null){
                 mToggleSwitch.setChecked(setting.isOn());
+                mToggleSwitch.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                   setting.clickFunction();
+                    }
+                });
             }
         }
 

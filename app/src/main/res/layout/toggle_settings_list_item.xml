@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="?attr/bgColor"
+    android:textColor="?attr/textColor">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/note_list_item_card_view"
@@ -12,19 +14,27 @@
         app:cardCornerRadius="4dp"
         app:cardElevation="4dp"
         app:cardUseCompatPadding="true"
-        app:contentPadding="16dp" >
+        app:contentPadding="16dp"
+        android:background="?attr/bgColor"
+        app:cardBackgroundColor="?attr/bgColor"
+        android:textColor="?attr/textColor">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/settings_item_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="?attr/bgColor"
+            android:textColor="?attr/textColor">
 
             <TextView
                 android:id="@+id/settings_list_item_main_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/main_text"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:background="?attr/bgColor"
+                android:textColor="?attr/textColor"
+                android:text="@string/main_text"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/settings_list_item_toggle"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -37,8 +47,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="@string/sub_text"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:background="?attr/bgColor"
+                android:textColor="?attr/subTextColor"
+                android:text="@string/sub_text"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/settings_list_item_toggle"
                 app:layout_constraintStart_toStartOf="parent"

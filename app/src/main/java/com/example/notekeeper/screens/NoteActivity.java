@@ -9,11 +9,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.notekeeper.R;
 import com.example.notekeeper.data.Note;
 import com.example.notekeeper.data.Notebook;
 import com.example.notekeeper.classes.Extras;
+import com.example.notekeeper.data.Setting;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -30,6 +32,7 @@ public class NoteActivity extends AppCompatActivity {
     public static final int NOTE_ID_NOT_FOUND = -1;
 
     private EditText noteNameView, noteContentView, noteTagsView;
+    private TextView hdr;
     private Button newNotebookBtn;
     private FloatingActionButton saveBtn;
 
@@ -41,6 +44,7 @@ public class NoteActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        showTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.note_activity);
 
@@ -76,10 +80,13 @@ public class NoteActivity extends AppCompatActivity {
             allNotebooksNames.add(allNotebooks.get(i).getName());
         }
 
-        ArrayAdapter<String> adapterNotebooks = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,allNotebooksNames);
+        ArrayAdapter<String> adapterNotebooks = new ArrayAdapter<>(this, R.layout.spinner_item,allNotebooksNames);
         adapterNotebooks.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+        spinnerNotebooks.setSelection(0);
         spinnerNotebooks.setAdapter(adapterNotebooks);
+
+        hdr = findViewById(R.id.note_activity_header);
 
         noteNameView = findViewById(R.id.note_name);
         noteContentView = findViewById(R.id.note_content);
@@ -178,10 +185,17 @@ public class NoteActivity extends AppCompatActivity {
             List<Notebook> notebooks = Notebook.getAllNotebooks(getBaseContext());
             spinnerNotebooks.setSelection(notebooks.indexOf(note.getNoteBook(getBaseContext())));
 
+            hdr.setText(note.getName());
+
             noteNameView.setText(note.getName());
             noteTagsView.setText(note.getTags());
             noteContentView.setText(note.getContent());
         }
+    }
+
+    private void showTheme(){
+        Setting theme = Extras.getTheme(getBaseContext());
+        setTheme(theme.getValue().equals(Setting.THEME_LIGHT)?R.style.AppTheme_NoActionBar:R.style.DarkTheme_NoActionBar);
     }
 
     private void readDisplayStateValues() {
@@ -242,12 +256,12 @@ public class NoteActivity extends AppCompatActivity {
             Extras.showToast(getBaseContext(), "Enter the name and the content!");
         }
         else {
-            String text = "Check out my note: \"" + noteContent + "\"\n\n" + note.getContent();
+            String text = "Check out my note: \"" + noteContent; //+ "\"\n\n" + note.getContent();
 
             // To send it as an email
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("message/rfc2822");
-            intent.putExtra(Intent.EXTRA_SUBJECT, noteContent);
+            intent.putExtra(Intent.EXTRA_SUBJECT, noteName);
             intent.putExtra(Intent.EXTRA_TEXT, text);
             startActivity(intent);
         }
