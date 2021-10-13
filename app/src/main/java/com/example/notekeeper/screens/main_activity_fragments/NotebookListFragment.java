@@ -7,14 +7,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.notekeeper.R;
+import com.example.notekeeper.classes.Extras;
 import com.example.notekeeper.data.Notebook;
 import com.example.notekeeper.adapters.NotebookListAdapter;
-import com.example.notekeeper.screens.NoteActivity;
 import com.example.notekeeper.screens.NotebookActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -22,11 +26,12 @@ import java.util.List;
 
 public class NotebookListFragment extends Fragment {
     private View rootView;
+    private EditText searchbar;
     private FloatingActionButton addBtn;
     private List<Notebook> mNotebooks;
-    private NotebookListAdapter mNoteRecyclerAdapter;
+    private NotebookListAdapter mNotebookRecyclerAdapter;
     private RecyclerView mRecyclerNotebooks;
-    private LinearLayoutManager mNotesLayoutManager;
+    private LinearLayoutManager mNotebooksLayoutManager;
 
     public NotebookListFragment() {
         // require a empty public constructor
@@ -35,17 +40,65 @@ public class NotebookListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        rootView = inflater.inflate(R.layout.note_list_activity, container, false);
-        addBtn = rootView.findViewById(R.id.add_note_btn);
+        rootView = inflater.inflate(R.layout.fragment_notebook_list, container, false);
+
+        addBtn = rootView.findViewById(R.id.add_notebook_btn);
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 moveToNewNotebookActivity();
             }
         });
+
         initDisplayContent();
+
+
+        searchbar = rootView.findViewById(R.id.notebook_list_searchbar);
+        searchbar.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                search();
+                return true;
+            }
+        });
+        searchbar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    search();
+                    return true;
+                }
+                return false;
+            }
+        });
         return rootView;
     }
+
+    private void search(){
+        String searchTerm = searchbar.getText().toString().trim().toLowerCase();
+
+        if (!searchTerm.isEmpty()){
+            List<Notebook> notebooks = Notebook.getAllNotebooks(getContext());
+            mNotebooks.clear();
+
+            for (int i = 0; i < notebooks.size(); i++){
+                Notebook n = notebooks.get(i);
+
+                boolean inName = n.getName().toLowerCase().contains(searchTerm);
+                boolean inDescription = n.getDescription().toLowerCase().contains(searchTerm);
+
+                if (inName || inDescription){
+                    mNotebooks.add(n);
+                }
+            }
+
+            mNotebookRecyclerAdapter.notifyDataSetChanged();
+        }
+        else{
+            Extras.showToast(getContext(),"Enter a search term!");
+        }
+    }
+
 
     @Override
     public void onResume() {
@@ -68,13 +121,13 @@ public class NotebookListFragment extends Fragment {
         if (rootView != null){
             mNotebooks = Notebook.getAllNotebooks(getContext());
 
-            mRecyclerNotebooks = rootView.findViewById(R.id.notes_recycler);
+            mRecyclerNotebooks = rootView.findViewById(R.id.notebooks_recycler);
 //
-            mNotesLayoutManager = new LinearLayoutManager(getContext());
-            mRecyclerNotebooks.setLayoutManager(mNotesLayoutManager);
+            mNotebooksLayoutManager = new LinearLayoutManager(getContext());
+            mRecyclerNotebooks.setLayoutManager(mNotebooksLayoutManager);
 
-            mNoteRecyclerAdapter = new NotebookListAdapter(getContext(), mNotebooks);
-            mRecyclerNotebooks.setAdapter(mNoteRecyclerAdapter);
+            mNotebookRecyclerAdapter = new NotebookListAdapter(getContext(), mNotebooks);
+            mRecyclerNotebooks.setAdapter(mNotebookRecyclerAdapter);
         }
     }
 }

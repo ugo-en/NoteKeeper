@@ -54,8 +54,18 @@ public class Notebook {
         return dbGuy.getNotebook(id);
     }
 
+    public static Notebook getNotebookByName(Context context, String name){
+        DBGuy dbGuy = new DBGuy(context);
+        return dbGuy.getNotebookNyName(name);
+    }
+
     public ArrayList<Note> getAllItsNotes(Context context){
         DBGuy dbGuy = new DBGuy(context);
         return dbGuy.getAllNotesFromNotebook(this.id);
+    }
+
+    public boolean delete(Context context){
+        DBGuy dbGuy = new DBGuy(context);
+        return dbGuy.deleteNotebook(this);
     }
 }

@@ -31,13 +31,13 @@
             android:label="@string/developer_contact"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".screens.NoteActivity"
-            android:label="Note"
+            android:name=".screens.NotebookActivity"
+            android:label="@string/notebook_label"
             android:theme="@style/AppTheme_NoActionBar" />
         <activity
-            android:name=".screens.NotebookActivity"
-            android:label="Notebook"
-            android:theme="@style/AppTheme" />
+            android:name=".screens.NoteActivity"
+            android:label="@string/note_label"
+            android:theme="@style/AppTheme_NoActionBar" />
     </application>
 
 </manifest>

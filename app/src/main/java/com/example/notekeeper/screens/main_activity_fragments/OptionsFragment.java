@@ -13,9 +13,9 @@ import android.view.ViewGroup;
 
 import com.example.notekeeper.R;
 import com.example.notekeeper.classes.Extras;
-import com.example.notekeeper.classes.ToggleSetting;
-import com.example.notekeeper.classes.DefaultSetting;
-import com.example.notekeeper.adapters.SettingsAdapter;
+import com.example.notekeeper.classes.ToggleOption;
+import com.example.notekeeper.classes.DefaultOption;
+import com.example.notekeeper.adapters.OptionsAdapter;
 import com.example.notekeeper.data.Setting;
 import com.example.notekeeper.screens.DeveloperContactActivity;
 import com.example.notekeeper.screens.MainActivity;
@@ -29,38 +29,38 @@ import java.util.List;
  * Use the  factory method to
  * create an instance of this fragment.
  */
-public class SettingsFragment  extends Fragment {
+public class OptionsFragment extends Fragment {
     private View rootView;
     private RecyclerView mRecycler;
 
-    private List<DefaultSetting> mSettings;
-    private SettingsAdapter mSettingsAdapter;
-    private LinearLayoutManager mSettingsLayoutManager;
+    private List<DefaultOption> mOptions;
+    private OptionsAdapter mOptionsAdapter;
+    private LinearLayoutManager mOptionsLayoutManager;
 
-    public SettingsFragment() {
+    public OptionsFragment() {
         // require a empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        rootView = inflater.inflate(R.layout.settings_activity, container, false);
+        rootView = inflater.inflate(R.layout.fragment_options, container, false);
 
         mRecycler = rootView.findViewById(R.id.settings_recycler);
-        mSettingsLayoutManager = new LinearLayoutManager(getContext());
-        mRecycler.setLayoutManager(mSettingsLayoutManager);
+        mOptionsLayoutManager = new LinearLayoutManager(getContext());
+        mRecycler.setLayoutManager(mOptionsLayoutManager);
 
-        mSettings = createAllSettings();
-        mSettingsAdapter = new SettingsAdapter(getContext(), mSettings);
-        mRecycler.setAdapter(mSettingsAdapter);
+        mOptions = createAllSettings();
+        mOptionsAdapter = new OptionsAdapter(getContext(), mOptions);
+        mRecycler.setAdapter(mOptionsAdapter);
         return rootView;
     }
 
-    private ArrayList<DefaultSetting> createAllSettings(){
-        ArrayList<DefaultSetting> settings = new ArrayList<>();
+    private ArrayList<DefaultOption> createAllSettings(){
+        ArrayList<DefaultOption> settings = new ArrayList<>();
 
         settings.add(
-            new ToggleSetting("Enable Dark Mode", "Toggle light or dark mode.", DefaultSetting.TOGGLE, Extras.getTheme(getContext()).getValue().equals(Setting.THEME_DARK)) {
+            new ToggleOption("Enable Dark Mode", "Toggle light or dark mode.", DefaultOption.TOGGLE, Extras.getTheme(getContext()).getValue().equals(Setting.THEME_DARK)) {
                 @Override
                 public void clickFunction() {
                     Extras.showToast(getContext(),String.valueOf(this.isOn()));
@@ -78,7 +78,7 @@ public class SettingsFragment  extends Fragment {
         );
 
         settings.add(
-            new DefaultSetting("Privacy Policy", "View our privacy statement.", DefaultSetting.DEFAULT) {
+            new DefaultOption("Privacy Policy", "View our privacy statement.", DefaultOption.DEFAULT) {
                 @Override
                 public void clickFunction() {
                     Intent intent = new Intent(getActivity(), PrivacyPolicyActivity.class);
@@ -88,7 +88,7 @@ public class SettingsFragment  extends Fragment {
         );
 
         settings.add(
-            new DefaultSetting("Developer Contact", "Click to see developer contact", DefaultSetting.DEFAULT) {
+            new DefaultOption("Developer Contact", "Click to see developer contact", DefaultOption.DEFAULT) {
                 @Override
                 public void clickFunction() {
                     Intent intent = new Intent(getActivity(), DeveloperContactActivity.class);

@@ -8,20 +8,19 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.notekeeper.R;
-import com.example.notekeeper.classes.DefaultSetting;
-import com.example.notekeeper.classes.Extras;
-import com.example.notekeeper.classes.ToggleSetting;
+import com.example.notekeeper.classes.DefaultOption;
+import com.example.notekeeper.classes.ToggleOption;
 
 import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHolder> {
+public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.ViewHolder> {
     private final Context mContext;
     private final LayoutInflater mLayoutInflater;
-    private final List<DefaultSetting> mSettings;
+    private final List<DefaultOption> mSettings;
 
-    public SettingsAdapter(Context context, List<DefaultSetting> notes) {
+    public OptionsAdapter(Context context, List<DefaultOption> notes) {
         this.mContext = context;
         this.mSettings = notes;
         this.mLayoutInflater = LayoutInflater.from(mContext);
@@ -31,10 +30,10 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView;
         switch (viewType){
-            case DefaultSetting.TOGGLE:
-                itemView = mLayoutInflater.inflate(R.layout.toggle_settings_list_item, parent, false);
+            case DefaultOption.TOGGLE:
+                itemView = mLayoutInflater.inflate(R.layout.list_item_toggle_option, parent, false);
                 break;
-            default: itemView = mLayoutInflater.inflate(R.layout.settings_list_item, parent, false);
+            default: itemView = mLayoutInflater.inflate(R.layout.list_item_option, parent, false);
         }
 
         return new ViewHolder(itemView,parent);
@@ -42,13 +41,13 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        DefaultSetting setting = mSettings.get(position);
+        DefaultOption setting = mSettings.get(position);
 
         holder.getMainText().setText(setting.getMainText());
         holder.getSubText().setText(setting.getSubText());
 
-        if (setting instanceof ToggleSetting){
-            holder.setToggleSwitch((ToggleSetting) setting);
+        if (setting instanceof ToggleOption){
+            holder.setToggleSwitch((ToggleOption) setting);
         }
 
         holder.setClickFunction(setting);
@@ -57,7 +56,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
 
     @Override
     public int getItemViewType(int position) {
-        DefaultSetting setting = mSettings.get(position);
+        DefaultOption setting = mSettings.get(position);
         return setting.getSettingType();
     }
 
@@ -85,7 +84,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
             return this.mToggleSwitch;
         }
 
-        public void setToggleSwitch(final ToggleSetting setting) {
+        public void setToggleSwitch(final ToggleOption setting) {
             mToggleSwitch = mItemView.findViewById(R.id.settings_list_item_toggle);
             if (mToggleSwitch != null){
                 mToggleSwitch.setChecked(setting.isOn());
@@ -98,7 +97,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
             }
         }
 
-        public void setClickFunction(final DefaultSetting setting){
+        public void setClickFunction(final DefaultOption setting){
             mItemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

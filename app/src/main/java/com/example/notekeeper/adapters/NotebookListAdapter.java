@@ -29,7 +29,7 @@ public class NotebookListAdapter extends RecyclerView.Adapter<NotebookListAdapte
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = mLayoutInflater.inflate(R.layout.notebook_list_item, parent, false);
+        View itemView = mLayoutInflater.inflate(R.layout.list_item_notebook, parent, false);
         return new ViewHolder(itemView);
     }
 

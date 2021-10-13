@@ -1,14 +1,14 @@
 package com.example.notekeeper.classes;
 
 
-public abstract class DefaultSetting {
+public abstract class DefaultOption {
     public static final int DEFAULT = 0;
     public static final int TOGGLE = 1;
 
     private String mainText, subText;
     private int settingType = DEFAULT;
 
-    public DefaultSetting(String mainText, String subText, int settingType) {
+    public DefaultOption(String mainText, String subText, int settingType) {
         this.mainText = mainText;
         this.subText = subText;
         this.settingType = settingType;

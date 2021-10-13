@@ -3,7 +3,6 @@ package com.example.notekeeper.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.provider.Browser;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +30,7 @@ public class DeveloperContactsAdapter extends RecyclerView.Adapter<DeveloperCont
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // using the 'mLayoutInflater', which is a member of this class was yielding errors.
         // Thus, after some research, I resorted to using 'LayoutInflater.from(parent.getContext())'
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.developer_contacts_list_item, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_developer_contacts, parent, false);
         return new ViewHolder(itemView);
     }
 

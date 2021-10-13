@@ -199,6 +199,37 @@ class DBGuy extends SQLiteOpenHelper {
         return notebook;
     }
 
+    Notebook getNotebookNyName(String name){
+        Notebook notebook = null;
+
+        try{
+            SQLiteDatabase dbx = this.getWritableDatabase();
+            Cursor cur = dbx.rawQuery("SELECT * FROM "+NOTEBOOKS+" WHERE "+NOTEBOOK_NAME+" = ? ORDER BY "+NOTEBOOK_DATE_CREATED ,new String[]{name});
+
+            if (cur.moveToFirst()){
+                System.out.println("Next");
+
+                int id = cur.getInt(0);
+                String description = cur.getString(2);
+
+                Date dateCreated = new Date(Calendar.getInstance().getTimeInMillis());
+                long dateLong = cur.getLong(3);
+                dateCreated.setTime(dateLong);
+
+                int onlineId = cur.getInt(4);
+
+                System.out.println("Specific notebook: "+name);
+                notebook = new Notebook(id, onlineId, name,description,dateCreated);
+            }
+            cur.close();
+            dbx.close();
+        }
+        catch (Exception ex){
+            System.out.println("An error occurred while getting this notebook!");
+        }
+        return notebook;
+    }
+
     ArrayList<Note> getAllNotesByName(boolean asc){
         ArrayList<Note> allNotes = new ArrayList<>();
         try{
@@ -451,7 +482,7 @@ class DBGuy extends SQLiteOpenHelper {
             dbx.close();
         }
         catch (Exception ex){
-            Extras.showToast(context,ex.toString());
+// //            Extras.showToast(context,ex.toString());
         }
         return setting;
     }
@@ -478,7 +509,7 @@ class DBGuy extends SQLiteOpenHelper {
             dbx.close();
         }
         catch (Exception ex){
-            Extras.showToast(context,ex.toString());
+            // Extras.showToast(context,ex.toString());
         }
         return notebook;
     }

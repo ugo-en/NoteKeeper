@@ -8,8 +8,6 @@ import android.os.Bundle;
 
 import com.example.notekeeper.R;
 import com.example.notekeeper.adapters.DeveloperContactsAdapter;
-import com.example.notekeeper.adapters.SettingsAdapter;
-import com.example.notekeeper.classes.DefaultSetting;
 import com.example.notekeeper.classes.DeveloperContact;
 import com.example.notekeeper.classes.Extras;
 import com.example.notekeeper.data.Setting;

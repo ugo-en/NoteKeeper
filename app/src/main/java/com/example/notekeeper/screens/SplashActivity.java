@@ -15,7 +15,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         showTheme();
-        setContentView(R.layout.splash_activity);
+        setContentView(R.layout.activity_splash_screen);
 
         Thread loaderThread = new Thread(new Thread(){
             @Override

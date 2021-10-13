@@ -19,25 +19,30 @@ import com.example.notekeeper.data.Setting;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 
 public class NoteActivity extends AppCompatActivity {
-    public static final String NOTE_ID = "com.example.notekeeper.NOTE_POSITION";
+    public static final String NOTE_ID = "com.example.notekeeper.NOTE_ID";
+
+    public static final String NOTE_NAME = "com.example.notekeeper.NOTE_NAME";
+    public static final String NOTE_TAGS = "com.example.notekeeper.NOTE_TAGS";
+    public static final String NOTE_CONTENT = "com.example.notekeeper.NOTE_CONTENT";
+
     public static final String CREATED_NOTEBOOK_ID = "com.example.notekeeper.NOTEBOOK_ID";
 
     public static final int NOTE_ID_NOT_FOUND = -1;
 
     private EditText noteNameView, noteContentView, noteTagsView;
-    private TextView hdr;
+    private Toolbar toolbar;
     private Button newNotebookBtn;
     private FloatingActionButton saveBtn;
 
     private Note note;
     private ArrayList<Notebook> allNotebooks;
+    private ArrayList<String> allNotebooksNames;
 
     private Spinner spinnerNotebooks;
     private boolean isNewNote, isMakingNote;
@@ -46,12 +51,12 @@ public class NoteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         showTheme();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.note_activity);
+        setContentView(R.layout.activity_note);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.new_note);
         setSupportActionBar(toolbar);
 
-        spinnerNotebooks = findViewById(R.id.spinner_notebooks);
         saveBtn = findViewById(R.id.new_notebook_save_btn);
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,19 +79,18 @@ public class NoteActivity extends AppCompatActivity {
         });
 
         allNotebooks = Notebook.getAllNotebooks(getBaseContext());
-        ArrayList<String> allNotebooksNames = new ArrayList<String>();
+        allNotebooksNames = new ArrayList<String>();
 
         for (int i = 0; i < allNotebooks.size(); i++){
             allNotebooksNames.add(allNotebooks.get(i).getName());
         }
 
-        ArrayAdapter<String> adapterNotebooks = new ArrayAdapter<>(this, R.layout.spinner_item,allNotebooksNames);
+        ArrayAdapter<String> adapterNotebooks = new ArrayAdapter<>(this, R.layout.item_spinner,allNotebooksNames);
         adapterNotebooks.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+        spinnerNotebooks = findViewById(R.id.spinner_notebooks);
         spinnerNotebooks.setSelection(0);
         spinnerNotebooks.setAdapter(adapterNotebooks);
-
-        hdr = findViewById(R.id.note_activity_header);
 
         noteNameView = findViewById(R.id.note_name);
         noteContentView = findViewById(R.id.note_content);
@@ -101,6 +105,7 @@ public class NoteActivity extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
         isMakingNote = false;
+        readDisplayStateValues();
     }
 
     @Override
@@ -117,10 +122,21 @@ public class NoteActivity extends AppCompatActivity {
         isMakingNote = true;
 
         Intent intent = new Intent(NoteActivity.this, NotebookActivity.class);
+
         if (note != null){
             intent.putExtra(NOTE_ID,note.getId());
         }
-        startActivity(intent);
+        else{
+            String name = noteNameView.getText().toString().trim();
+            String content = noteContentView.getText().toString().trim();
+            String tags = noteTagsView.getText().toString().trim();
+
+            intent.putExtra(NOTE_NAME,name);
+            intent.putExtra(NOTE_TAGS,tags);
+            intent.putExtra(NOTE_CONTENT,content);
+        }
+
+         startActivity(intent);
     }
 
     private void createNote() {
@@ -136,6 +152,8 @@ public class NoteActivity extends AppCompatActivity {
         }
         else{
             Notebook notebook = allNotebooks.get(spinnerNotebooks.getSelectedItemPosition());
+//            Extras.showToast(getBaseContext(),notebook.toString());
+
             Note note = Note.createNote(getBaseContext(),name,content,tags,notebook.getId());
             if(note==null){
                 Extras.showToast(getBaseContext(),"An error occurred while saving this note!");
@@ -182,15 +200,22 @@ public class NoteActivity extends AppCompatActivity {
 
     private void displayNote() {
         if (note!=null) {
-            List<Notebook> notebooks = Notebook.getAllNotebooks(getBaseContext());
-            spinnerNotebooks.setSelection(notebooks.indexOf(note.getNoteBook(getBaseContext())));
-
-            hdr.setText(note.getName());
+            toolbar.setTitle(note.getName());
 
             noteNameView.setText(note.getName());
             noteTagsView.setText(note.getTags());
             noteContentView.setText(note.getContent());
         }
+    }
+
+    private void displayPrevNoteContent() {
+        Intent intent = getIntent();
+
+        toolbar.setTitle(R.string.new_note);
+
+        noteNameView.setText(intent.getStringExtra(NOTE_NAME));
+        noteTagsView.setText(intent.getStringExtra(NOTE_TAGS));
+        noteContentView.setText(intent.getStringExtra(NOTE_CONTENT));
     }
 
     private void showTheme(){
@@ -201,13 +226,31 @@ public class NoteActivity extends AppCompatActivity {
     private void readDisplayStateValues() {
         Intent intent = getIntent();
         int noteId = intent.getIntExtra(NOTE_ID, NOTE_ID_NOT_FOUND);
+        isNewNote = noteId == NOTE_ID_NOT_FOUND;
 
-        note = noteId == NOTE_ID_NOT_FOUND ?null:Note.getNoteById(getBaseContext(),noteId);
-
-        isNewNote = note == null;
-
-        if(!isNewNote){
+        if (noteId != NOTE_ID_NOT_FOUND){
+            note = Note.getNoteById(getBaseContext(),noteId);
             displayNote();
+        }
+        else{
+            displayPrevNoteContent();
+        }
+
+        // set spinner
+
+        int newNotebookId = intent.getIntExtra(CREATED_NOTEBOOK_ID,NOTE_ID_NOT_FOUND);
+
+        if (newNotebookId != NOTE_ID_NOT_FOUND){
+            Notebook notebook = Notebook.getNotebookById(getBaseContext(),newNotebookId);
+            if (notebook != null){
+                spinnerNotebooks.setSelection(this.allNotebooksNames.indexOf(notebook.getName()));
+            }
+        }
+        else if (note != null){
+            spinnerNotebooks.setSelection(this.allNotebooksNames.indexOf(note.getNoteBook(getBaseContext()).getName()));
+        }
+        else{
+            spinnerNotebooks.setSelection(0);
         }
     }
 
