@@ -147,6 +147,7 @@ public class NotebookListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        checkPermission();
         initDisplayContent();
     }
 
