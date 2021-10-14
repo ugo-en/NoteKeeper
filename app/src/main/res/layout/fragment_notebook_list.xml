@@ -10,27 +10,59 @@
     tools:context=".practice.NoteListActivity">
 
 
-    <EditText
-        android:id="@+id/notebook_list_searchbar"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:id="@+id/notebook_list_search_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="5dp"
-        android:hint="@string/notebook_search"
-        android:textSize="17sp"
-        android:textColor="?attr/textColor"
-        android:textColorHint="?attr/subTextColor"
+        android:layout_gravity="center"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_weight="0.8"
         android:background="@drawable/edit_text_border"
+        android:orientation="horizontal"
+        android:weightSum="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.015"
-        android:autofillHints=""
-        android:inputType="textAutoComplete"
-        android:imeOptions="actionSearch" />
+        app:layout_constraintVertical_bias="0.015">
 
+        <EditText
+            android:id="@+id/notebook_list_searchbar"
+            android:layout_width="300dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:hint="@string/notebook_search"
+            android:textSize="17sp"
+            android:textColor="?attr/textColor"
+            android:textColorHint="?attr/subTextColor"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.015"
+            android:autofillHints=""
+            android:inputType="textAutoComplete"
+            android:imeOptions="actionSearch" />
+
+
+        <ImageView
+            android:id="@+id/notebook_list_mic"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="2dp"
+            android:layout_marginStart="2dp"
+            android:layout_weight="0.2"
+            android:contentDescription="@string/microphone_for_voice_search"
+            android:clickable="true"
+            android:contextClickable="true"
+            android:src="@drawable/ic_baseline_mic_24" />
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/notebooks_recycler"
@@ -43,7 +75,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/notebook_list_searchbar"
+        app:layout_constraintTop_toBottomOf="@id/notebook_list_search_layout"
         app:layout_constraintVertical_bias="0.035"
         app:spanCount="5"/>
 

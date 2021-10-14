@@ -60,4 +60,5 @@
     <string name="notebook_search">Search by name or description</string>
     <string name="notebook_label">Notebook</string>
     <string name="note_label">Note</string>
+    <string name="microphone_for_voice_search">Microphone for voice search</string>
 </resources>
