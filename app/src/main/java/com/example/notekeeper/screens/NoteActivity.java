@@ -154,7 +154,7 @@ public class NoteActivity extends AppCompatActivity {
             Notebook notebook = allNotebooks.get(spinnerNotebooks.getSelectedItemPosition());
 //            Extras.showToast(getBaseContext(),notebook.toString());
 
-            Note note = Note.createNote(getBaseContext(),name,content,tags,notebook.getId());
+            Note note = Note.createNote(getBaseContext(),name,tags,content,notebook.getId());
             if(note==null){
                 Extras.showToast(getBaseContext(),"An error occurred while saving this note!");
             }
