@@ -1,1 +1,0 @@
-This module contains no "before" files because you'll be creating a new project from scratch
